@@ -1,0 +1,16 @@
+{
+  "name": "restaurants-api-server",
+  "version": "1.0.0",
+  "description": "a simple restaurants NodeJS api for beginners to api development",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "body-parser": "1.18.3",
+    "swagger-ui-express": "^4.0.1"
+  }
+}

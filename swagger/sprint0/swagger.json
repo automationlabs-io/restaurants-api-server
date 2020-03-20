@@ -1,0 +1,215 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Welcome to the Simple Restaurants API - developed by Automation School\u00AE",
+    "description": ""
+  },
+  "tags": [
+    {
+      "name": "Restaurants API",
+      "description": "API for managing Restaurants"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+  },
+  "security": [
+  ],
+  "paths": {
+    "/restaurants": {
+      "post": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Create a new restaurant",
+        "parameters": [
+          {
+            "name": "restaurant",
+            "in": "body",
+            "description": "New restaurant to create",
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "New Restaurant is successfully created",
+            "schema": {
+              "$ref": "#/definitions/RestaurantResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Get all restaurants.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All restaurants in the API. An array of zero or more Restaurants.",
+            "schema": {
+              "$ref": "#/definitions/Restaurants"
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/search/{searchTerm}": {
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Search Restaurants by a search term. It searches the name field of the restaurants and returns matching restaurants. The search is case insensitive.",
+        "parameters": [
+          {
+            "name": "searchTerm",
+            "in": "path",
+            "required": true,
+            "description": "search term, not case sensitive, can be partial or full",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurants Search Results. An array of zero or more matching Restaurants.",
+            "schema": {
+              "$ref": "#/definitions/Restaurants"
+            }
+          }
+        }
+      }
+    },
+    "/restaurants/{restaurantId}": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "Valid ID of restaurant",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "Get/retrieve restaurant with given ID",
+        "responses": {
+          "200": {
+            "description": "Success: Restaurant with requested ID is found",
+            "schema": {
+              "$ref": "#/definitions/RestaurantResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete restaurant with given ID",
+        "tags": [
+          "Restaurants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success: Restaurant with requested ID is deleted",
+            "schema": {
+              "$ref": "#/definitions/RestaurantResponse"
+            }
+          },
+          "404": {
+            "description": "Not found: Restaurant with requested ID is not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update restaurant with given ID",
+        "tags": [
+          "Restaurants"
+        ],
+        "parameters": [
+          {
+            "name": "restaurant",
+            "in": "body",
+            "description": "new Restaurant object",
+            "schema": {
+              "$ref": "#/definitions/Restaurant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Restaurant is updated",
+            "schema": {
+              "$ref": "#/definitions/RestaurantResponse"
+            }
+          },
+          "404": {
+            "description": "Not found: Restaurant with requested ID is not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Restaurant": {
+      "required": [
+        "id",
+        "name",
+        "rating"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "RestaurantResponse": {
+      "required": [
+        "id",
+        "name",
+        "rating"
+      ],
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        }
+      }
+    },
+    "Restaurants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RestaurantResponse"
+      }
+    }
+  }
+}
